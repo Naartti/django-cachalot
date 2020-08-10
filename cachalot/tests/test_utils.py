@@ -18,7 +18,7 @@ class TestUtilsMixin:
     def tearDown(self):
         if connection.vendor == 'postgresql':
             flush_args = [no_style(), (PostgresModel._meta.db_table,),]
-            if float(f"{DJANGO_VERSION[0]}.{DJANGO_VERSION[1]}") < 3.1:
+            if float(".".join(map(str, DJANGO_VERSION[:2]))) < 3.1:
                 flush_args.append(())
             flush_sql_list = connection.ops.sql_flush(*flush_args)
             with transaction.atomic():
