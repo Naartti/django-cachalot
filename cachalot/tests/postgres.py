@@ -31,8 +31,10 @@ def is_pg_field_available(name):
         pass
 
     try:
+        from django import VERSION
         from django.contrib.postgres.fields import JSONField
-        fields.append("JSONField")
+        if VERSION[0] < 4:
+            fields.append("JSONField")
     except ImportError:
         pass
     return name in fields

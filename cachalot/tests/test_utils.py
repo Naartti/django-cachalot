@@ -18,7 +18,7 @@ class TestUtilsMixin:
     def tearDown(self):
         if connection.vendor == 'postgresql':
             flush_sql_list = connection.ops.sql_flush(
-                no_style(), (PostgresModel._meta.db_table,), ())
+                no_style(), (PostgresModel._meta.db_table,),)
             with transaction.atomic():
                 for sql in flush_sql_list:
                     with connection.cursor() as cursor:

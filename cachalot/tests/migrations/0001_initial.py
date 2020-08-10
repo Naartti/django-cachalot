@@ -11,8 +11,10 @@ def extra_regular_available_fields():
     fields = []
     try:
         # TODO Add to module import when Dj40 dropped
+        from django import VERSION
         from django.contrib.postgres.fields import JSONField
-        fields.append(('json', JSONField(null=True, blank=True)))
+        if VERSION[0] == 3 and VERSION[1] > 0:
+            fields.append(('json', JSONField(null=True, blank=True)))
     except ImportError:
         pass
 
